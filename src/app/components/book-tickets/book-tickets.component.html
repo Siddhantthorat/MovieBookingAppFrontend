@@ -1,0 +1,45 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-4 mt-3">
+        <div class="card shadow"> 
+            <div class="container text-center">
+                <img src="/assets/book.png" style="width: 100px; " alt="loginImage" 
+                class="img-fluid mt-3">
+            </div> 
+            <h2 class="text-center mt-2">Book Ticket</h2>
+            <div class="card-body">
+                <form (ngSubmit)="onSubmit()">
+                      <div class="row">
+                          <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="movieName" class="form-label">Movie Name:</label>
+                                <input required type="text" class="form-control" [(ngModel)]="movieName" 
+                                    name="movieName" id="movieName">
+                            </div>
+                          </div>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="theatherName" class="form-label">Theather Name:</label>
+                                <input required type="text" class="form-control" [(ngModel)]="theatherName" 
+                                    name="theatherName" id="theatherName">
+                            </div>
+                        </div>
+                      </div>
+                    <div class="form-group mb-3">
+                        <label for="noOfTickets" class="form-label">Number of Tickets:</label>
+                        <input required type="number" class="form-control" [(ngModel)]="noOfTickets" 
+                            name="noOfTickets" id="noOfTickets" placeholder="1">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="seats" class="form-label">Seats:</label>
+                        <input required type="text" class="form-control" [(ngModel)]="seats" 
+                            name="seats" id="seats" placeholder="A1,A2,A3">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="form-group btn btn-dark px-4">Book</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

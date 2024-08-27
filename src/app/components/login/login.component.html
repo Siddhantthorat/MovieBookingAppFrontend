@@ -1,0 +1,32 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-4 mt-3">
+        <div class="card shadow">
+            <div class="container text-center">
+                <img src="/assets/password.png" style="width: 100px;" alt="loginImage" 
+                class="img-fluid mt-3">
+            </div> 
+            <h2 class="text-center">Login</h2>
+            <div class="card-body">
+                <form (ngSubmit)="Login()">
+                    <div class="form-group mb-3">
+                        <label for="text" class="form-label">FirstName:</label>
+                        <input type="text" class="form-control" [(ngModel)]="firstName" name="firstName" id="firstName">
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" [(ngModel)]="password" name="password" id="password">
+                    </div>
+                    <h1>{{message}}</h1>
+                    <br>
+                    <div class="text-center">
+                        <button mat-raised-button color="primary"  type="submit" class="full-width">Login</button>
+                        <p class="mt-2">Don't have an account?<a routerLink="/register">Create one</a></p>
+                        <p class="mt-2">Forget Password?<a routerLink="/forgetPassword">reset</a></p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

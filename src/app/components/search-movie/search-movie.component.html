@@ -1,0 +1,17 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-12 col-md-4" *ngFor="let movie of movies">
+
+            <div class="card mt-3 shadow">
+                <img src="assets/movie.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h2 class="card-title">{{movie.id.movieName | uppercase}}</h2>
+                    <h4 class="card-text" style="color: grey;">{{movie.id.theatherName | uppercase}}</h4>
+                    <p class="card-text" style="color: red;">Hurry Up only {{movie.allotedSeats}} seats available</p>
+                    <button class="btn btn-primary" (click)="bookTicket(movie.id.movieName, movie.id.theatherName)">Book Ticket</button>
+                    <span class="mx-2" *ngIf="email=='admin@gmail.com'"><button id="delete" (click)="onDelete(movie.id.movieName, movie.id.theatherName)"><img src="assets/trash-can.png" height="30" width="20"/></button></span>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

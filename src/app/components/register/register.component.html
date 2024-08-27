@@ -1,0 +1,77 @@
+<div class="row justify-content-center mt-3">
+    <div class="col-12 col-md-4 mt-3">
+        <div class="card shadow"> 
+            <div class="container text-center">
+                <img src="/assets/profile.png" style="width: 100px; border: 1px solid grey; padding: 1px;" alt="loginImage" 
+                class="img-fluid mt-3">
+            </div> 
+            <h2 class="text-center mt-2">Register</h2>
+            <div class="card-body">
+                <form (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="loginId" class="form-label">Login ID: </label>
+                                <input type="text" class="form-control" 
+                                [(ngModel)]="user.loginId" name="loginId" id="loginId">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="firstName" class="form-label">First Name: </label>
+                                <input type="text" class="form-control" 
+                                [(ngModel)]="user.firstName" name="firstName" id="firstName">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col">
+                            <div class="form-group mb-3">
+                                <label for="lastName" class="form-label">Last Name:   </label>
+                                <input type="text" class="form-control" 
+                                [(ngModel)]="user.lastName" name="lastName" id="lastName">
+                            </div>
+                        </div>
+                    </div> 
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Email ID:      </label>
+                        <input type="email" class="form-control" 
+                        [(ngModel)]="user.email" name="email" id="email">
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Password:   </label>
+                        <input type="password" class="form-control" 
+                        [(ngModel)]="user.password" name="password" id="password">
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password: </label>
+                        <input type="password" class="form-control" 
+                        [(ngModel)]="confirmPassword" name="confirmPassword" id="confirmPassword">
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="contactNumber" class="form-label">Contact Number: </label>
+                        <input type="text" class="form-control" 
+                        [(ngModel)]="user.contactNumber" name="contactNumber" id="contactNumber">
+                    </div>
+                    <br>
+                    <div class="form-group mb-3">
+                        <label for="contactNumber" class="form-label">Roles:    </label>
+                        <input type="text" class="form-control" 
+                        [(ngModel)]="user.roles" name="roles" id="roles">
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button mat-raised-button color="primary" type="submit" class="form-group btn btn-dark px-4">Register</button><br>
+                        <p class="mt-2">Already have an account?<a routerLink="/login">Login</a></p>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
