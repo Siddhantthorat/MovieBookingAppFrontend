@@ -96,31 +96,16 @@ Here’s how to fix the issue by creating or attaching the necessary instance pr
     -  Add the following key-value pair:
       Key: SPRING_DATA_MONGODB_URI
       Value: mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>
-    -  Key: SERVER_PORT
+    -  Key: PORT
       Value: 8081 (It enables my springboot application port to execute ,else it will take 5000 port number)
 
       review.
 12. Once the env is running , upload and deploy your .jar file
 13. Select your jar from target folder and give versioin as per your choice  like i have given moviebookingapp v1.0 upload once uploaded check the health is green 
 14. now check it with the url  http://moviebookingapp.us-east-1.elasticbeanstalk.com/ -If it is working than good.
-      
-11.change the bucket policy as below and write your arn{
-    "Version": "2008-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowPublicRead",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "*"
-            },
-            "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::moviebookingapp-s3bucket/*"
-        }
-    ]
-}
-12.
-13.  Under *Application code*, upload your Spring Boot JAR file.
-14. . To create .jar cmd->mvn clean install -DskipTests
+Note:
+ Under *Application code*, upload your Spring Boot JAR file.
+ To create .jar cmd->mvn clean install -DskipTests
 
 #### Step 2: Configure EC2 and Networking
 
@@ -140,3 +125,53 @@ Here’s how to fix the issue by creating or attaching the necessary instance pr
    ```properties
    Key: SPRING_DATA_MONGODB_URI
    Value: mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>
+### 2. Deploy Angular Frontend to S3
+Step 1: Build the Angular Application
+Before uploading the Angular application, ensure it is built for production:
+
+    ng build --prod
+This command creates a dist/ folder with the production-ready files.
+
+Step 2: Create an S3 Bucket for Hosting
+  Go to the AWS S3 Console.
+  Click Create bucket.
+  Name the bucket and ensure it has public access.
+  Disable Block all public access.
+Step 3: Upload Files to S3
+  Upload the contents of the dist/ folder (from the Angular build) to your S3 bucket.
+  Make sure all the files have public read permissions.
+Step 4: Set Bucket Policy for Public Access
+Add a bucket policy to allow public access to the contents:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/*"
+    }
+  ]
+}```
+
+Replace YOUR_BUCKET_NAME with the actual name of your S3 bucket.
+
+Step 5: Enable Static Website Hosting
+  Go to the Properties tab of your S3 bucket.
+  Scroll down to Static website hosting.
+  Enable the option Use this bucket to host a website.
+  Set index.html as the index document and optionally set an error document (e.g., 404.html).
+Step 6: CORS Configuration (If Needed)
+If your Angular app makes API calls to different domains, configure CORS in the S3 bucket:
+
+xml
+```
+<CORSConfiguration>
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>```
