@@ -128,6 +128,7 @@ Note:
 ### 2. Deploy Angular Frontend to S3
 Step 1: Build the Angular Application
 Before uploading the Angular application, ensure it is built for production:
+Ensure you have put the elasticbeanstalk url in the angular service and then crete dist folder
 
     ng build --prod
 This command creates a dist/ folder with the production-ready files.
@@ -164,7 +165,7 @@ Step 5: Enable Static Website Hosting
   Enable the option Use this bucket to host a website.
   Set index.html as the index document and optionally set an error document (e.g., 404.html).
 Step 6: CORS Configuration (If Needed)
-If your Angular app makes API calls to different domains, configure CORS in the S3 bucket:
+  If your Angular app makes API calls to different domains, configure CORS in the S3 bucket:
 
 xml
 ```
@@ -174,4 +175,5 @@ xml
         <AllowedMethod>GET</AllowedMethod>
         <AllowedHeader>*</AllowedHeader>
     </CORSRule>
-</CORSConfiguration>```
+</CORSConfiguration> 
+```
