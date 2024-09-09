@@ -1,27 +1,66 @@
-# MovieBookingAppFrontend
+# Spring Boot & Angular Deployment
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
+This repository contains a *Spring Boot* backend application and an *Angular* frontend. The Spring Boot application is deployed on *AWS Elastic Beanstalk, and the Angular frontend is deployed to **AWS S3. The backend also connects to **MongoDB Atlas* for database storage.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Prerequisites
 
-## Code scaffolding
+Before starting the deployment, ensure you have the following:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- AWS account
+- MongoDB Atlas account
+- AWS CLI configured
+- EC2 key pairs (for Elastic Beanstalk)
+- Angular application built and ready for deployment
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Deployment Steps
 
-## Running unit tests
+### 1. Deploy Spring Boot Backend to AWS Elastic Beanstalk
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#### Step 1: Create an Elastic Beanstalk Environment
 
-## Running end-to-end tests
+1. Go to the *AWS Elastic Beanstalk Console*.
+2. Click *Create a new environment*.
+3. Choose *Web Server Environment*.
+4. In the *Platform* section:
+   - Choose *Java* and select *Java 17*. you can choose coretto 17
+5. You can give any domain name you required, in my case I have given moviebookingapp
+6.  change the bucket policy as below and write your arn{
+    "Version": "2008-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPublicRead",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::moviebookingapp-s3bucket/*"
+        }
+    ]
+}
+7.
+8.  Under *Application code*, upload your Spring Boot JAR file.
+9. . To create .jar cmd->mvn clean install -DskipTests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### Step 2: Configure EC2 and Networking
 
-## Further help
+1. *Instance Settings*:
+   - Select an *EC2 key pair* that you have already created.
+2. *VPC & Subnet*:
+   - Ensure the subnet is public to allow external access to the environment.
+3. *Security Groups*:
+   - Allow inbound traffic on *port 5000* or *port 8080* based on your configuration.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Step 3: Configure MongoDB Atlas Connection
+
+1. After the environment is created, go to *Configuration* in the Elastic Beanstalk environment.
+2. Under *Software, click **Modify*.
+3. In the *Environment Properties* section, add the following:
+
+   ```properties
+   Key: SPRING_DATA_MONGODB_URI
+   Value: mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>
