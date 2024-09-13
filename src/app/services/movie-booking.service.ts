@@ -9,13 +9,18 @@ import Swal from 'sweetalert2';
 
 export class MovieBookingService {
 
-  private url = "http://localhost:8081";
+  // private url = "http://localhost:8081";
+  //for aws deployment we need to do this 
+//  private url="http://ec2-3-94-203-55.compute-1.amazonaws.com:8081";
+//above with ec2 instane and below is for elatic beanstalk
+private url="http://moviebookingapp.us-east-1.elasticbeanstalk.com";
   constructor(private http:HttpClient) { }
 
   login(firstName: string, password: string) {
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(firstName + ':' + password) });
-        return this.http
-        .get('http://localhost:8081/login',{ headers, responseType: 'text' as 'json' })
+     //for aws deployment we need to do this    
+    return this.http
+        .get('http://moviebookingapp.us-east-1.elasticbeanstalk.com/login',{ headers, responseType: 'text' as 'json' })
         .pipe(
             map(
                 (userData:any) => {
